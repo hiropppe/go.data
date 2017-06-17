@@ -1,1 +1,1 @@
-# go_game_data
+# go.data
