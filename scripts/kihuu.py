@@ -9,12 +9,11 @@ import traceback
 
 site_root = "http://www.kihuu.net"
 
-base = os.path.dirname(os.path.abspath(__file__))
-save_dir = 'kihuu'
+save_dir = sys.argv[1]
 
 prolist_root = lxml.html.parse('http://www.kihuu.net/html/prolist.htm').getroot()
 for pro_a in prolist_root.cssselect('table.prolist a'):
-    print("==> " + pro_a.text)
+    print("==> {:s}".format(pro_a.text.encode('utf8')))
     try:
         page_no = 1
         while True:
@@ -25,7 +24,7 @@ for pro_a in prolist_root.cssselect('table.prolist a'):
             if sgfurls and page_no <= 50:
                 page_no += 1
                 for url in sgfurls:
-                    save_path = os.path.join(base, save_dir, os.path.basename(url))
+                    save_path = os.path.join(save_dir, os.path.basename(url))
                     if not os.path.exists(save_path):
                         print("Downloading {:s}".format(url))
                         urllib.urlretrieve(url, save_path)

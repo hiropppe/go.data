@@ -12,7 +12,7 @@ import traceback
 socket.setdefaulttimeout(180)
 
 base = os.path.dirname(os.path.abspath(__file__))
-save_dir = './sina'
+save_dir = sys.argv[1]
 
 
 def request_page(sgflist_url):
@@ -20,7 +20,7 @@ def request_page(sgflist_url):
     sgfurls = set(re.findall(r"JavaScript:gibo_load\('(http://.+.sgf)'\)", sgflist_content))
     for url in sgfurls:
         try:
-            save_path = os.path.join(base, save_dir, os.path.basename(url).decode('gb2312'))
+            save_path = os.path.join(save_dir, os.path.basename(url).decode('gb2312'))
             if not os.path.exists(save_path):
                 print("Downloading {:s}".format(url))
                 urllib.urlretrieve(url, save_path)
@@ -28,7 +28,7 @@ def request_page(sgflist_url):
             else:
                 print("SGF already exists: {:s}".format(save_path))
         except KeyboardInterrupt:
-            break
+            return
         except IOError:
             print("IOError {:s}".format(url))
             print("Wait seconds then retring {:s}".format(url))
@@ -44,6 +44,8 @@ def attempt_page(sgflist_url, attempt):
     try:
         print("Fetch page (attempt={:d}): {:s}".format(attempt, sgflist_url))
         request_page(url)
+    except KeyboardInterrupt:
+        return
     except (requests.exceptions.ConnectionError, requests.exceptions.ConnectTimeout):
         err, msg, _ = sys.exc_info()
         sys.stderr.write("{} {}\n".format(err, msg))
