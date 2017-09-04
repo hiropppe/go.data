@@ -100,13 +100,15 @@ ENV/
 # mypy
 .mypy_cache/
 
-baduk/*
-gogod/*
-kihuu/*
-sina/*
-wangjinzhuo.pgd/*
-!baduk/.gitkeep
-!gogod/.gitkeep
-!kihuu/.gitkeep
-!sina/.gitkeep
-!wangjinzhuo.pgd/.gitkeep
+expert_play/crowd/*
+expert_play/baduk/*
+expert_play/gogod/*
+expert_play/kihuu/*
+expert_play/sina/*
+expert_play/wangjinzhuo.pgd/*
+!expert_play/crowd/.gitkeep
+!expert_play/baduk/.gitkeep
+!expert_play/gogod/.gitkeep
+!expert_play/kihuu/.gitkeep
+!expert_play/sina/.gitkeep
+!expert_play/wangjinzhuo.pgd/.gitkeep
