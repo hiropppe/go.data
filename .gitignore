@@ -99,3 +99,14 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+baduk/*
+gogod/*
+kihuu/*
+sina/*
+wangjinzhuo.pgd/*
+!baduk/.gitkeep
+!gogod/.gitkeep
+!kihuu/.gitkeep
+!sina/.gitkeep
+!wangjinzhuo.pgd/.gitkeep
