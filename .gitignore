@@ -107,6 +107,7 @@ expert_play/kihuu/*
 expert_play/sina/*
 expert_play/wangjinzhuo.pgd/*
 expert_play/kifudepot/*
+expert_play/gokifu/*
 !expert_play/crowd/.gitkeep
 !expert_play/baduk/.gitkeep
 !expert_play/gogod/.gitkeep
@@ -114,3 +115,4 @@ expert_play/kifudepot/*
 !expert_play/sina/.gitkeep
 !expert_play/wangjinzhuo.pgd/.gitkeep
 !expert_play/kifudepot/.gitkeep
+!expert_play/gokifu/.gitkeep
