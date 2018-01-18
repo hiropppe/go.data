@@ -100,7 +100,6 @@ ENV/
 # mypy
 .mypy_cache/
 
-expert_play/crowd/*
 expert_play/baduk/*
 expert_play/gogod/*
 expert_play/kihuu/*
@@ -109,7 +108,8 @@ expert_play/wangjinzhuo.pgd/*
 expert_play/kifudepot/*
 expert_play/gokifu/*
 expert_play/aeb/*
-!expert_play/crowd/.gitkeep
+expert_play/kgs4d/*
+expert_play/tygem9d/*
 !expert_play/baduk/.gitkeep
 !expert_play/gogod/.gitkeep
 !expert_play/kihuu/.gitkeep
@@ -118,3 +118,5 @@ expert_play/aeb/*
 !expert_play/kifudepot/.gitkeep
 !expert_play/gokifu/.gitkeep
 !expert_play/aeb/.gitkeep
+!expert_play/kgs4d/.gitkeep
+!expert_play/tygem9d/.gitkeep
