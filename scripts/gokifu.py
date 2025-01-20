@@ -1,11 +1,8 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-
-from __future__ import print_function
+#!/usr/bin/env python3
 
 import lxml.html
 import os
-import urllib
+import urllib.request
 import requests
 import socket
 import sys
@@ -22,7 +19,7 @@ page = 1
 def parse_list(page, save_dir, attempt):
     try:
         url = LIST_URL.format(page)
-        print("Fetch page (attempt={:d}): {:s}".format(attempt, url))
+        print(f"Fetch page: {url}")
         content = requests.get(url).content
         root = lxml.html.fromstring(content)
         data_list = root.cssselect('div#gamelist div.game_type a:nth-child(2)')
@@ -32,27 +29,27 @@ def parse_list(page, save_dir, attempt):
                 download_url = data.attrib['href']
                 save_path = os.path.join(save_dir, os.path.basename(download_url))
                 if not os.path.exists(save_path):
-                    print("Downloading {:s}".format(download_url))
-                    urllib.urlretrieve(download_url, save_path)
+                    print(f"Downloading {download_url}")
+                    sgfdata = urllib.request.urlopen(download_url).read()
+                    with open(save_path, mode="w") as w:
+                        print(sgfdata, file=w)
                 else:
-                    print("SGF already exists: {:s}".format(save_path))
+                    print(f"SGF already exists: {save_path}")
             except KeyboardInterrupt:
                 sys.exit()
             except IOError:
                 print("IOError {:s}".format(download_url))
-                print("Wait seconds then retring {:s}".format(download_url))
+                print("Wait seconds then retring {download_url}")
                 time.sleep(10)
-                urllib.urlretrieve(download_url, save_path)
-            except:
-                err, msg, _ = sys.exc_info()
-                sys.stderr.write("{} {}\n".format(err, msg))
-                sys.stderr.write(traceback.format_exc())
+                sgfdata = urllib.request.urlopen(download_url).read()
+                with open(save_path, mode="w") as w:
+                    print(sgfdata, file=w)
+            except Exception as e:
+                print(type(e).__name__, str(e), file=sys.stderr)
     except KeyboardInterrupt:
         sys.exit()
-    except (requests.exceptions.ConnectionError, requests.exceptions.ConnectTimeout):
-        err, msg, _ = sys.exc_info()
-        sys.stderr.write("{} {}\n".format(err, msg))
-        sys.stderr.write(traceback.format_exc())
+    except (requests.exceptions.ConnectionError, requests.exceptions.ConnectTimeout) as e:
+        print(type(e).__name__, str(e), file=sys.stderr)
         if attempt > 0:
             time.sleep(10)
             attempt -= 1
@@ -61,7 +58,6 @@ def parse_list(page, save_dir, attempt):
 
 socket.setdefaulttimeout(180)
 
-base = os.path.dirname(os.path.abspath(__file__))
 save_dir = sys.argv[1]
 
 try:
@@ -70,7 +66,5 @@ try:
         page += 1
 except SystemExit:
     pass
-except:
-    err, msg, _ = sys.exc_info()
-    sys.stderr.write("{} {}\n".format(err, msg))
-    sys.stderr.write(traceback.format_exc())
+except Exception as e:
+    print(type(e).__name__, str(e), file=sys.stderr)
