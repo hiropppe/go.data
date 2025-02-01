@@ -103,6 +103,7 @@ ENV/
 expert_play/baduk/*
 expert_play/gogod/*
 expert_play/kihuu/*
+expert_play/kihuu_prolist/*
 expert_play/sina/*
 expert_play/wangjinzhuo.pgd/*
 expert_play/kifudepot/*
@@ -113,6 +114,7 @@ expert_play/tygem9d/*
 !expert_play/baduk/.gitkeep
 !expert_play/gogod/.gitkeep
 !expert_play/kihuu/.gitkeep
+!expert_play/kihuu_prolist/.gitkeep
 !expert_play/sina/.gitkeep
 !expert_play/wangjinzhuo.pgd/.gitkeep
 !expert_play/kifudepot/.gitkeep
